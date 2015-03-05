@@ -1,7 +1,7 @@
 Running the Snake Game - AWS Mobile Services Sample App
 =======================================================
 
-<img title="SnakeGameAndroid" src='https://github.com/jinman/snake-game-aws/snakegame.png' height='500px'/>
+<img title="SnakeGameAndroid" src='https://github.com/jinman/snake-game-aws/blob/master/snakegame.png' height='50%' width='50%'/>
 
 Snake Game is simple mobile game for Android devices where the snake eats the apples and gets longer and longer as it eats them. It serves as a sample app to show how to use different AWS Mobile Services together. 
 
