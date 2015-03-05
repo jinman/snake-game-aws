@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//src/com/amazon/example/snake/game/GameController.java=UTF-8
+encoding//src/com/amazon/example/snake/game/GameLevel.java=UTF-8
+encoding//src/com/amazon/example/snake/game/GameModel.java=UTF-8
+encoding//src/com/amazon/example/snake/game/GameView.java=UTF-8
+encoding//src/com/amazon/example/snake/game/GridPoint.java=UTF-8
+encoding//src/com/amazon/example/snake/game/Snake.java=UTF-8
