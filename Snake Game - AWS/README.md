@@ -49,6 +49,7 @@ It uses the AWS Android SDK and number of AWS Mobile Services:
    * Edit IAM Policies for UnAuth Role, Auth Role so it can access, Kinesis, DynamoDB, Mobile Analytics, Lambda and so on
    * A Lambda Function "cloudFunction" with default roles and config
    		Add the following to the "HelloWorld" app
+   		
    		```javascript
    		context.done(null, event + 'Lambda'); //will send "Hello From Lambda"
    		```
