@@ -1,5 +1,6 @@
 package com.amazon.example.snake;
 
+import com.amazon.example.snake.aws.AWSClientManager;
 import com.amazon.example.snake.aws.CognitoSyncTask;
 import com.amazon.example.snake.aws.DDBGetTask;
 import com.amazon.example.snake.aws.DDBGetTask.DDBTaskFinishedListener;
@@ -8,7 +9,7 @@ import com.amazon.example.snake.aws.DDBTaskResult;
 import com.amazon.example.snake.aws.S3UploadTask;
 import com.amazon.example.snake.aws.S3UploadTask.UploadTaskFinishedListener;
 import com.amazon.example.snake.helpers.Screenshotter;
-
+import com.amazonaws.mobileconnectors.cognito.Dataset;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -41,7 +42,8 @@ public class GameOverScreenActivity extends Activity implements
 		
 		
 		new DDBGetTask(this).execute();
-		
+		new CognitoSyncTask(this).doSync(false);
+
 		
 		gameOverText.setText("Your High Level : " + highLevel
 				+ "\n Your High Score : " + highScore
@@ -72,8 +74,10 @@ public class GameOverScreenActivity extends Activity implements
 			@Override
 			public void onClick(View v) {
 				
-			CognitoSyncTask tsk = new CognitoSyncTask(GameOverScreenActivity.this);
-			tsk.doSync();
+			Dataset dataset = AWSClientManager.getCognitoSync().openOrCreateDataset(AWSClientManager.COGNITO_SYNC_DATASET_NAME);
+        	dataset.delete();
+			new CognitoSyncTask(GameOverScreenActivity.this).doSync();
+			
 				
 			}
 		});

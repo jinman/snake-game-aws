@@ -14,9 +14,9 @@
     <string name="activity_login_title_line_one">Welcome to the Snake Game</string>
     <string name="activity_login_title_line_two">Login with:</string>
     
-   <!-- Change these to your own social login keys -->
+   <!-- Change these to your own social login keys-->
     <string name="amzn_api_key">xxx.eyJhcHBGYW1pbHlJZCI6ImFtem4xLmFwcGxpY2F0aW9uLjVkMzc0NmUyZDlhYTQ3MzJhY2IzOTQzYWQ5NzY1NzIyIiwiaWQiOiJkZTlhNDc4MC1mMWE0LTExZTMtYmEwYS1hNzg0OTdhOThmNWUiLCJhcHBJZCI6ImFtem4xLmFwcGxpY2F0aW9uLWNsaWVudC42Y2QxY2M3NDVhOGI0MzBjODk0YmQxMGI4NjIwMzA3YSIsImlzcyI6IkFtYXpvbiIsInBrZyI6ImNvbS5hbWF6b24uZXhhbXBsZS5zbmFrZSIsInZlciI6IjIiLCJhcHBWYXJpYW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1jbGllbnQuNmNkMWNjNzQ1YThiNDMwYzg5NGJkMTBiODYyMDMwN2EiLCJ0eXBlIjoiQVBJS2V5IiwiaWF0IjoiMTQwMjUxNzYxNjI5OCIsImNsaWVudElkIjoiYW16bjEuYXBwbGljYXRpb24tb2EyLWNsaWVudC5iNWU4OWE1NDhjMzM0NTZhYWViMDhlNGJjZjljMjBlNiIsImFwcHNpZyI6IkVEOjQ2OjIxOkExOkM1Ojg5Ojc5OjA1OjFGOjVEOjNFOjE3OjREOjM5OjNGOkUyIn0=.mu+mWZ0MG8fCBnNtElKYI6rpAuriBOcKqKcmaOqLDc1AIpv1rFqzbp9YN2oUeGI+J7eYv6nmKfoQJjdcXqQA5kPs5SpuaNDlun+qUObHxbKkdxmt8rEPXQfqX4gzLtNLWFi/tIy7IozDfbO6DXO+tzg80ojicl0Ti20XdBCmqCXLls68yivAu5jUwWPwA0ABVVes+/rSfiHC2O5ZNLXRrHn+X+TTi7Es7ItGh5vnqHVC1oncbea4sJO804cY+hyTbQLcDfOWwu4EkgJqLTnUkcUvgL2iN8QvBRrTjhQuIrAarq5+zqjyNFxk2MYAki1KMlaJNjkyzKFZJi5tPgJSIw==</string>
     <string name="facebook_app_id">496eeeeee83333</string>
-    <string name="google_client_id">444444444-5c3vo44h5fb9e5thfhfivaktsc0o.apps.googleusercontent.com</string>
-
+    <string name="google_client_id">444444444-5c3vo44h5fb9e5thfhfivaktsc0o.apps.googleusercontent.com</string> 
+  
 </resources>

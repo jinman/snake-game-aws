@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.amazon.example.snake.R;
 import com.amazon.example.snake.aws.AWSClientManager;
+import com.amazon.example.snake.aws.LambdaSyncTask;
 import com.amazon.identity.auth.device.AuthError;
 import com.amazon.identity.auth.device.authorization.api.AmazonAuthorizationManager;
 import com.amazon.identity.auth.device.authorization.api.AuthorizationListener;
@@ -69,12 +70,17 @@ public class LoginActivity extends Activity implements Session.StatusCallback,
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		
 
 		Log.d(LOG_TAG, "onCreate");
 
 		// initialize
 		AWSClientManager.init(this);
 
+		//Calling Lambda
+		new LambdaSyncTask(LoginActivity.this).execute("Hello from ");
+		
+		
 		// Initialize Login Request Type
 		loginRequestType = LoginType.NONE;
 

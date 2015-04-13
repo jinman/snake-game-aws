@@ -3,7 +3,6 @@ package com.amazon.example.snake;
 import com.amazon.example.snake.aws.AWSClientManager;
 import com.amazon.example.snake.aws.CognitoSyncTask;
 import com.amazon.example.snake.aws.KinesisPutTask;
-
 import com.amazon.example.snake.game.*;
 import com.amazon.identity.auth.device.authorization.api.AmazonAuthorizationManager;
 import com.amazonaws.mobileconnectors.cognito.*;
@@ -233,8 +232,10 @@ public class SnakeGameActivity extends Activity implements GameStateListener {
 						+ gameLevel.getScore() + "!", Toast.LENGTH_SHORT)
 				.show();
 
-		new KinesisPutTask().execute(new Integer[] {
-				gameLevel.getLevelNumber(), gameLevel.getScore() });
+		//new KinesisPutTask().execute(new Integer[] {
+		//		gameLevel.getLevelNumber(), gameLevel.getScore() });
+		
+		new CognitoSyncTask(this).doSync(false);
 
 		if (gameLevel.getLevelNumber() == 2) {
 			EventClient eventClient = analytics.getEventClient();

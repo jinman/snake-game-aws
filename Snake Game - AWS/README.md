@@ -16,6 +16,7 @@ It uses the AWS Android SDK and number of AWS Mobile Services:
    * Amazon DynamoDB to PUT last score
    * Amazon Mobile Analytics to start and stop session (also custom events)
    * Amazon Kinesis to capture Logcat data (crash reports and clickstreams)
+   * (New!) AWS Lambda to synchronously invoke cloud functions (shows a toast on app start "Hello From Lambda")
 
 1. Import the project Snake Game - AWS into Eclipse
    * Go to File -> Import.  Import Wizard will open.
@@ -28,18 +29,31 @@ It uses the AWS Android SDK and number of AWS Mobile Services:
    * aws-android-sdk-X.X.X-core.debug.jar
    * extras/aws-android-sdk-X.X.X-cognito.debug.jar		
 	+ For example:
-	+ aws-android-sdk-2.1.10-kinesis.jar
-	+ aws-android-sdk-2.1.10-cognito.jar		
-	+ aws-android-sdk-2.1.10-mobileanalytics.jar
-	+ aws-android-sdk-2.1.10-core.jar			
-	+ aws-android-sdk-2.1.10-s3.jar
-	+ aws-android-sdk-2.1.10-ddb-mapper.jar		
-	+ aws-android-sdk-2.1.10-sns.jar
-	+ aws-android-sdk-2.1.10-ddb.jar			
+	+ aws-android-sdk-2.2.0-kinesis.jar
+	+ aws-android-sdk-2.2.0-cognito.jar		
+	+ aws-android-sdk-2.2.0-mobileanalytics.jar
+	+ aws-android-sdk-2.2.0-core.jar			
+	+ aws-android-sdk-2.2.0-s3.jar
+	+ aws-android-sdk-2.2.0-ddb-mapper.jar		
+	+ aws-android-sdk-2.2.0-sns.jar
+	+ aws-android-sdk-2.2.0-ddb.jar	
+	+ aws-android-sdk-2.2.0-lambda.jar		
 
 3. Update the path to the FacebookSDK or google-play-services_lib in project.properties. By default it points to the one included in the repo so if you just cloned the project and didn't move any of the directories this should not be necessary. (While Facebook Login is not required to run the app, the SDK is still required to build). 
 
-4. Update your App configuration for Cognito:
+4. Using AWS Management Console, create following cloud resources
+   * An S3 bucket. Add a file with the name "Archive.zip" for the S3 download demo to the S3 bucket
+   * A DynamoDB table. Hash Key: userid (String), Range key: recordid (String)
+   * A Kinesis stream
+   * A Cognito identity pool with a Login with Amazon, a Facebook identity and Google+ tokens
+   * Edit IAM Policies for UnAuth Role, Auth Role so it can access, Kinesis, DynamoDB, Mobile Analytics, Lambda and so on
+   * A Lambda Function "cloudFunction" with default roles and config
+   		Add the following to the "HelloWorld" app
+   		```javascript
+   		context.done(null, event + 'Lambda'); //will send "Hello From Lambda"
+   		```
+
+5. Update your App configuration:
    * Make sure you have an identity pool created and configured at https://console.aws.amazon.com/cognito/ and you downloaded the starter code at the last step of the wizard.
    * Open CognitoSyncClientManager.java
    * Update "AWS_ACCOUNT_ID", "IDENTITY_POOL_ID", "UNAUTH_ROLE_ARN", and "AUTH_ROLE_ARN" with the values from the starter code.
@@ -53,16 +67,17 @@ It uses the AWS Android SDK and number of AWS Mobile Services:
         public static final String DDB_TABLE_NAME = "<your table name from AWS Management Console/DynamoDB";
         public static final String KINESIS_STREAM_NAME = "<your stream name from AWS Management Console/S3";
         public static final String KINESIS_DIRECTORY_NAME = "snakegamekinesisdirectory";
-        public static final String COGNITO_SYNC_DATASET_NAME = "snakegamestate";    
+        public static final String COGNITO_SYNC_DATASET_NAME = "snakegamestate";   
+        public static final String MOBILE_ANALYTICS_APP_ID = "SnakeGameAWS"; 
         ```
 
    * At this point you can run the sample if you have the support of unauthenticated identity configured in the identity pool.
      + Go to Project ->  Clean.
      + Go to Project ->  Build All.
      + Go to Run -> Run.
-   * To support Facebook Login and Login with Amazon, continue with step 4 and step 5.
+   * To support Facebook Login, Login with Amazon, Google+, continue with step below.
 
-5. To add support for Facebook Login (Optional)
+6. To add support for Facebook Login (Optional)
    * Follow the instructions at https://developers.facebook.com/docs/android/getting-started/ to create a Facebook app
      + For "Package Name", enter com.amazonaws.cognito.sync.demo
      + For "Class Name", enter com.amazonaws.cognito.sync.demo.MainActivity
@@ -74,7 +89,7 @@ It uses the AWS Android SDK and number of AWS Mobile Services:
      + Open project properties and under Android remove the placeholder Facebook library "path/to/facebook/sdk" and add "FacebookSDK"
    * At this point you can run the sample with Facebook Login.
 
-6. To add support for Login with Amazon. (Optional)
+7. To add support for Login with Amazon. (Optional)
    * Follow the instructions at https://login.amazon.com/android to register a new application
      + For "Label", enter Cognito sync demo
      + For "Package Name", enter com.amazonaws.cognito.sync.demo
@@ -82,10 +97,12 @@ It uses the AWS Android SDK and number of AWS Mobile Services:
    * Copy and paste the API key amzn_api_key in strings.xml
    * If this isn't configured properly, the "Login with Amazon" button will be disabled in the sample app.
     
-7. To add support for Google+ Signin. (Optional)
+8. To add support for Google+ Signin. (Optional)
    * Follow the instructions at https://code.google.com/apis/console to create a new Project
    * Create a new Client ID under APIs & Auth > Credentials
       + Select "Service Account"
    * Make sure your identity pool is configured to support Login with Amazon by entering the Client ID at https://console.aws.amazon.com/cognito/ from the previous step.
    * Copy and paste the client id to google_client_id key in strings.xml
    * If this isn't configured properly, the "Login with Amazon" button will be disabled in the sample app.
+   
+

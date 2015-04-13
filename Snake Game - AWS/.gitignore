@@ -1,3 +1,12 @@
+lint.xml
+gen/
+bin/
+.classpath
+.settings
+local.properties
+proguard-project.txt
+build.xml
+
 # OS generated files #
 ######################
 .DS_Store
@@ -8,6 +17,7 @@
 Icon?
 ehthumbs.db
 Thumbs.db
+bin/*
 
 # Patched code #
 ######################

@@ -38,17 +38,20 @@ public class CognitoSyncTask{
             Log.i("sync", record.toString());
         }
     }
+    
     public void doSync() {
+    	doSync(true);
+    }
+    public void doSync(boolean showDialog) {
 
-//        Log.i("doInBackground", "Starting CognitoSyncTask with id: "
-//                + cognito.getIdentityId());
-
-        ProgressDialog dialog = ProgressDialog.show(callingActivity,
-                "Syncing", "Please wait");
+    //    Log.i("doInBackground", "Starting CognitoSyncTask with id: "
+    //            + cognito.getIdentityId());
+    	ProgressDialog dialog = new ProgressDialog(callingActivity);
+        if(showDialog) dialog = ProgressDialog.show(callingActivity,"Syncing", "Please wait");
         Dataset dataset = AWSClientManager.getDataset();
         printDataset();
 
-        dataset.synchronize(new SimpleCallback(dialog));
+	        dataset.synchronize(new SimpleCallback(dialog));
     }
 
     private class SimpleCallback implements SyncCallback {
@@ -133,6 +136,9 @@ public class CognitoSyncTask{
         public boolean onDatasetDeleted(Dataset arg0, String arg1) { return false; }
 
         @Override
-        public boolean onDatasetsMerged(Dataset arg0, List<String> arg1) { return false; }
+        public boolean onDatasetsMerged(Dataset arg0, List<String> arg1) {
+        	dialog.dismiss();
+        	return false;
+        }
     }
 }
